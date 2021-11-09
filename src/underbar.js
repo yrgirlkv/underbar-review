@@ -90,10 +90,20 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    return _.filter(collection, function(input) {
+      return test(input) ? false : true;
+    });
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    let uniques = [];
+    for (let i = 0; i < array.length; i++) {
+      if (_.indexOf(uniques, array[i]) === -1) {
+        uniques.push(array[i]);
+      }
+    }
+    return uniques;
   };
 
 
