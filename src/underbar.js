@@ -97,10 +97,13 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    isSorted ? iterator = iterator : iterator = _.identity;
     let uniques = [];
+    let iteratorLog = [];
     for (let i = 0; i < array.length; i++) {
-      if (_.indexOf(uniques, array[i]) === -1) {
+      if (_.indexOf(iteratorLog, iterator(array[i])) === -1) {
         uniques.push(array[i]);
+        iteratorLog.push(iterator(array[i]));
       }
     }
     return uniques;
